@@ -19,3 +19,9 @@ function dirassert {
         mkdir -p "$1" || ( fatalerr "Could not create directory for output." )
     fi
 }
+
+function testfile {
+    if [ ! -f "$1" ] ; then
+        fatalerr "\"$1\" is not a file."
+    fi
+}

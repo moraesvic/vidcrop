@@ -6,10 +6,7 @@ if [ $# -ne 1 ] ; then
 	fatalerr "Filename must be first and only argument."
 fi
 
-if [ ! -f "$1" ] ; then
-	fatalerr "\"$1\" is not a file."
-fi
-
+testfile "$1"
 instructions_file="$1"
 
 # The following will remove comments (everything from the # on) and trailing space
