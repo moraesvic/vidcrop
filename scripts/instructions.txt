@@ -1,0 +1,35 @@
+# Instructions file
+#
+# Each line should contain three fields:
+# FILE_NAME START_CUT END_CUT
+# where START_CUT and END_CUT are the points where the video should be cut
+# The fields must be separated by commas
+#
+# Comments are allowed, starting with #
+# Times must be in the format HH:MM:SS
+
+# Day 01
+
+../media/day_1.m4v,00:04:28,00:04:38 # Slide: Opening ceremony + keynote
+../media/day_1.m4v,00:05:48,00:37:12 # Opening ceremony
+../media/day_1.m4v,00:37:15,01:21:03 # Keynote 1
+../media/day_1.m4v,01:27:05,03:04:02 # Panel 1
+
+# Day 02
+
+../media/day_2.m4v,00:15:35,01:25:42 # Session 1
+../media/day_2.m4v,01:33:00,03:09:38 # Panel 2
+
+# Day 03
+
+../media/day_3.m4v,00:08:40,01:20:48 #  Session 2
+../media/day_3.m4v,01:27:25,02:43:55 #  Panel 3
+
+# Day 04
+
+../media/day_4.m4v,00:01:50,01:11:02 #  Session 3
+../media/day_4.m4v,01:16:09,02:21:33 #  Session 4
+../media/day_4.m4v,02:29:35,03:23:42 #  Keynote 2
+../media/day_4.m4v,03:24:37,03:40:12 #  Closing remarks
+
+

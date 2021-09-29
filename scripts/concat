@@ -1,3 +1,0 @@
-#!/bin/bash
-
-ffmpeg -f concat -safe 0 -i merge.txt -c copy "../m4v/out/dia_1(Opening Slide + Opening Ceremony).m4v"

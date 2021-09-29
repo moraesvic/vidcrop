@@ -1,0 +1,21 @@
+#!/bin/bash
+
+media_dir="../media"
+out_dir="out"
+path_to_output="$media_dir/$out_dir/"
+
+function printerr {
+    >&2 echo -e "($0) $1"    
+}
+
+function fatalerr {
+    printerr "ERROR: $1 Exiting..."
+    exit 1
+}
+
+function dirassert {
+    if [ ! -d "$1" ] ; then
+        printerr "Subdirectory \"$1\" does not exist yet. Creating..."
+        mkdir -p "$1" || ( fatalerr "Could not create directory for output." )
+    fi
+}

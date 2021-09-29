@@ -1,14 +1,13 @@
 #!/bin/bash
 
+. ./common
+
 if [ $# -ne 1 ] ; then
-	echo "$0: ERROR! Filename must be first and only argument"
-	exit 1
+	fatalerr "Filename must be first and only argument."
 fi
 
-
 if [ ! -f "$1" ] ; then
-	echo "$0: ERROR! \"$1\" is not a file"
-	exit 1
+	fatalerr "\"$1\" is not a file."
 fi
 
 instructions_file="$1"
@@ -25,10 +24,10 @@ no_comments=$(sed -r "\
 	$del_empty" "$instructions_file")
 
 while IFS="," read -r input_file start_time end_time ; do
-	echo -e "---> cutting ${input_file} , start_time=${start_time} , end_time=${end_time}"
-	./cut_video "$input_file" "$start_time" "$end_time"
 
-echo ""
+	echo -e "cutting $input_file, start_time=$start_time, end_time=$end_time"
+	./vidcut "$input_file" "$start_time" "$end_time"
+	echo ""
 
 done <<< $no_comments
 

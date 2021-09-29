@@ -1,0 +1,27 @@
+#!/bin/bash
+
+. ./common
+
+if [ $# -ne 1 -a $# -ne 2 ] ; then
+    fatalerr "Usage: $0 MERGE_FILE [OUT_FILE], where each line in MERGE_FILE is of the form: \n\n\tfile 'path/to/file/filename.extension'"
+fi
+
+if [ ! -f "$1" ] ; then
+    fatalerr "Input file does not exist."
+fi
+
+input_file="$1"
+
+dirassert "$path_to_output"
+
+extension=$(head -1 "$input_file" | sed -rn "s/^.*\.(\w{3,4})'$/\1/p")
+
+if [ $# -eq 2 ] ; then
+    output_file="$2"
+else
+    output_file="out"
+fi
+
+output_file="${output_file}.${extension}"
+
+ffmpeg -f concat -safe 0 -i "$input_file" -c copy "$path_to_output/$output_file"

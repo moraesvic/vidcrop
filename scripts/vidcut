@@ -1,25 +1,23 @@
 #!/bin/bash
 
+. ./common
+
 if [ $# -ne 3 ] ; then
-	echo "$0: ERROR! wrong usage"
-	exit 1
+	fatalerr "Wrong usage"
 fi
 
 if [ ! -f "$1" ] ; then
-	echo "$0: ERROR! \"$1\" is not a file"
-	exit 1
+	fatalerr "\"$1\" is not a file"
 fi
 
 time_regex="^[0-9]{1,2}:[0-9]{2}:[0-9]{2}$"
 
 if [[ ! $2 =~ $time_regex ]] ; then
-	echo "$0: ERROR! \"$2\" is not a valid time"
-	exit 1
+	fatalerr "\"$2\" is not a valid time"
 fi
 
 if [[ ! $3 =~ $time_regex ]] ; then
-	echo "$0: ERROR! \"$3\" is not a valid time"
-	exit 1
+	fatalerr "\"$3\" is not a valid time"
 fi
 
 input_file="$1"
@@ -29,13 +27,9 @@ end_time="$3"
 file_without_path="${input_file##*/}"
 path_to_file="${input_file%/*}"
 
-out_dir="out"
 out_dir_full_path="${path_to_file}/${out_dir}"
 
-if [ ! -d "$out_dir_full_path" ] ; then
-	echo "$out_dir_full_path does not yet exist... creating..."
-	mkdir -p "$out_dir_full_path" || ( >&2 echo "$0: ERROR! Could not create path to output files! exiting"  ; exit 1 )
-fi
+dirassert "$out_dir_full_path"
 
 extension="${file_without_path##*.}"
 timestamp=$(date +"%d_%b__%T")
@@ -65,5 +59,7 @@ echo "${timestamp} : creating ${output_file}" >> "$log_file"
 # https://unix.stackexchange.com/questions/241535/problem-with-ffmpeg-in-bash-loop
 #
 
-ffmpeg -loglevel warning -ss "${start_time}" -to "${end_time}" -i "${input_file}" -c copy "${output_file}" < /dev/null
+ffmpeg -loglevel warning -ss "$start_time" \
+	-to "$end_time" -i "$input_file" \
+	-c copy "$output_file" < /dev/null
 
