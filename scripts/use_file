@@ -1,0 +1,34 @@
+#!/bin/bash
+
+if [ $# -ne 1 ] ; then
+	echo "$0: ERROR! Filename must be first and only argument"
+	exit 1
+fi
+
+
+if [ ! -f "$1" ] ; then
+	echo "$0: ERROR! \"$1\" is not a file"
+	exit 1
+fi
+
+instructions_file="$1"
+
+# The following will remove comments (everything from the # on) and trailing space
+
+sub_trailing_whitespace="s/[[:space:]]*$//"
+del_comment="/^#.*$/d ; s/#.*//"
+del_empty="/^[[:space:]]*$/d"
+
+no_comments=$(sed -r "\
+	$del_comment ; \
+	$sub_trailing_whitespace ; \
+	$del_empty" "$instructions_file")
+
+while IFS="," read -r input_file start_time end_time ; do
+	echo -e "---> cutting ${input_file} , start_time=${start_time} , end_time=${end_time}"
+	./cut_video "$input_file" "$start_time" "$end_time"
+
+echo ""
+
+done <<< $no_comments
+
