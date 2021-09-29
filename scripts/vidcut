@@ -38,8 +38,9 @@ wc -l
 
 )
 new_index=$((existing + 1))
+suffix=$(printf "%02d" $new_index)
 
-output_file="${out_dir_full_path}/${file_without_path%.*}.${new_index}__${start_time}_${end_time}.$extension"
+output_file="${out_dir_full_path}/${file_without_path%.*}.${suffix}__${start_time}_${end_time}.$extension"
 
 echo -e "Success! will output to $output_file"
 
