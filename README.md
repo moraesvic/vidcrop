@@ -16,7 +16,7 @@ The basic dependency to use this library is **ffmpeg**. In Ubuntu, this software
 
 Firstly, consider whether the file format you have at hand is the desired one. If desired, make use of the script **scripts/vidconvertmp4 YOUR_FILE** to convert your files to the MP4 format. In second place, make sure that all the video files are in the **media** directory, under the root folder of the project. Now, fill the file **scripts/instructions.txt** with instructions to section your videos (use the syntax of the given file as an example). To segment, execute **scripts/vidcrop scripts/instructions.txt**.
 
-As a final consideration, if you want to merge two video sections, write your instructions to the file **scripts/merge.txt** (according to the given example), and execute **scripts/vidconcat scripts/merge.txt media/ARQUIVO_DE_SAIDA**.
+As a final consideration, if you want to merge two video sections, write your instructions to the file **scripts/merge.txt** (according to the given example), and execute **scripts/vidconcat scripts/merge.txt media/OUTPUT_FILE**.
 
 # Versão em português
 
